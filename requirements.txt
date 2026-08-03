@@ -1,0 +1,13 @@
+pandas 
+numpy==1.26.4
+scikit-learn
+
+spacy
+beautifulsoup4
+
+matplotlib
+
+requests
+openpyxl
+lxml
+ipykernel
