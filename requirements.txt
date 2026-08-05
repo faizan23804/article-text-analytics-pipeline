@@ -11,3 +11,5 @@ requests
 openpyxl
 lxml
 ipykernel
+
+-e .

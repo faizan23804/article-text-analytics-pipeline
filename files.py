@@ -18,9 +18,9 @@ list_of_files = [
     f"{project_name}/logger/logging.py",
     "data/raw_data/",
     "data/raw_articles/dictionaries/",
-    "data/raw_articles/StopWords",
+    "data/raw_articles/StopWords/",
     "output/",
-    "logs/run_log.txt",
+    "logs/",
     "main.py",
     "setup.py"
     

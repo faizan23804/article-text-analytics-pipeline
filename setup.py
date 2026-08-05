@@ -22,9 +22,6 @@ def get_requirements()->List[str]:
     
     return requirements_lst
 
-print(get_requirements())
-
-
 
 setup(
 
