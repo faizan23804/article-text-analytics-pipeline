@@ -1,0 +1,48 @@
+│
+├── data/
+│   ├── raw_data/
+│   │   └── input.xlsx              # list of URLs
+│   ├── raw_articles/               
+│   └── dictionaries/
+│       ├── positive-words.txt
+│       ├── negative-words.txt
+│       └── stopwords/
+│       ├── StopWords_Auditor
+│       ├── StopWords_Currencies
+│       ├── StopWords_DatesandNumbers
+│       ├── StopWords_Generic
+│       ├── StopWords_GenericLong
+│       ├── StopWords_Geographic
+│       ├── StopWords_Names
+│
+|
+├── output/
+│   └── output.xlsx                  # final scored results
+│
+├── logs/
+│   └── run_log.txt (with date & time)                  # what failed, what succeeded
+│
+├── requirements.txt
+├── README.md
+├── files.py
+├── setup.py
+└── main.py                          # entry point
+|
+|
+|
+| -> article_text_analysis/
+|
+|
+├── src/
+│   ├── __init__.py
+│   ├── extractor.py                 # scraping logic only
+│   ├── text_cleaner.py              # stopwords removal, tokenizing
+│   ├── analyzer.py                  # sentiment + readability scoring
+│   └── pipeline.py                  # ties everything together
+│
+├── exceptions/
+│   ├── __init__.py
+│   └── exception.py				  # custom exception class
+├── logger/
+│   ├── __init__.py
+│   └── logging.py					  # custom logging.

@@ -1,15 +1,3 @@
-"""
-extractor.py
-------------
-Purpose: Given a URL, download the page and extract ONLY the article title
-and article body text. No headers, footers, navigation, or related-article
-sections.
-
-Design principle: This module does ONE job only — extraction.
-It doesn't know or care about stopwords, sentiment, or scoring.
-That logic belongs in other files (text_cleaner.py, analyzer.py).
-"""
-
 import requests
 import sys
 import os
@@ -20,19 +8,17 @@ from pathlib import Path
 from article_text_analysis.exceptions.exception import CustomException
 from article_text_analysis.logger.logging import logging
 
-# Reliable, invocation-independent path resolution 
 # __file__ = the absolute path to THIS script, wherever it sits on disk.
-# We walk UP from this file's own location to the project root, so this
-# script behaves identically no matter what folder you happened to be
-# standing in when you ran `python ...` from your terminal.
-#
+# walk UP from this file's own location to the project root, so this
+# script behaves identically no matter what folder happened to be
+
 # extractor.py lives at: <PROJECT_ROOT>/article_text_analysis/src/extractor.py
 # so we go up 3 levels: src -> article_text_analysis -> PROJECT_ROOT
 THIS_FILE = Path(__file__).resolve()
 PROJECT_ROOT = THIS_FILE.parents[2]
 DEFAULT_OUTPUT_DIR = PROJECT_ROOT / "data" / "raw_articles"
 
-# ---- Request headers ----
+# Request headers
 HEADERS = {
     "User-Agent": (
         "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
@@ -52,15 +38,15 @@ def fetch_html(url, timeout=10):
         response.raise_for_status()
         return response.text
     except requests.exceptions.RequestException as e:
-        # Expected, recoverable, per-URL failure — log and move on,
-        # don't crash the whole 148-article run over one bad link.
+        
         logging.error(f"Failed to fetch {url} | Reason: {e}")
         return None
 
 
 def extract_article(html, url_id):
     """
-    Given raw HTML, extract the article title and body text.
+    Receives raw HTML and URL_id,
+    extracts the article title and body text.
     """
     try:
         soup = BeautifulSoup(html, "lxml")
@@ -87,14 +73,6 @@ def extract_article(html, url_id):
  
         content_tags = body_container.find_all(["p", "li", "h1", "h2", "h3", "h4"])
  
-        # Strip the trailing boilerplate contact/signature block. This site
-        # consistently marks it with a heading reading "Contact Details" —
-        # we stop collecting the moment we reach that heading, so the
-        # heading itself and everything after it (email, Skype, WhatsApp,
-        # Telegram handles) is excluded from the article text. We match on
-        # the HEADING TEXT specifically (not a keyword search across all
-        # paragraphs) so we don't risk deleting legitimate article content
-        # that happens to mention words like "email" in a real sentence.
         collected_tags = []
         for tag in content_tags:
             tag_text = tag.get_text(strip=True)
