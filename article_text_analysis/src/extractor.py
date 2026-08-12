@@ -134,7 +134,7 @@ def process_url(url_id, url, delay=1):
 
 if __name__ == "__main__":
     test_url_id = "test001"
-    test_url = "https://insights.blackcoffer.com/ai-based-algorithmic-trading-bot-for-forex/"
+    test_url = ""
 
     success = process_url(test_url_id, test_url)
     if success:
