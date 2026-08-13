@@ -117,7 +117,7 @@ def process_url(url_id, url, delay=1):
 
 if __name__ == "__main__":
     test_url_id = "test001"
-    test_url = "https://insights.blackcoffer.com/automated-job-data-import-and-management-solution-for-enhanced-efficiency/"
+    test_url = ""
 
     success = process_url(test_url_id, test_url)
     if success:
