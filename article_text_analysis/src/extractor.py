@@ -76,8 +76,8 @@ def extract_article(html, url_id):
         collected_tags = []
         for tag in content_tags:
             tag_text = tag.get_text(strip=True)
-            if tag.name in ("h1", "h2", "h3", "h4") and tag_text.lower() == "contact details":
-                logging.info(f"[{url_id}] Reached 'Contact Details' heading — stopping extraction here.")
+            if tag.name in ("h1", "h2", "h3", "h4") and tag_text.lower() in ("project snapshots", "summarize", "contact details"):
+                logging.info(f"[{url_id}] Reached 'Project Snapshot' heading — stopping extraction here.")
                 break
             collected_tags.append(tag_text)
  
@@ -134,7 +134,7 @@ def process_url(url_id, url, delay=1):
 
 if __name__ == "__main__":
     test_url_id = "test001"
-    test_url = ""
+    test_url = "https://insights.blackcoffer.com/automated-job-data-import-and-management-solution-for-enhanced-efficiency/"
 
     success = process_url(test_url_id, test_url)
     if success:
