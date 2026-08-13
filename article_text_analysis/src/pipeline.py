@@ -16,26 +16,10 @@ from article_text_analysis.src.analyzer import (
     load_master_dictionary,
     analyze_article,
 )
+from article_text_analysis.constant import *
 
-# pipeline.py lives at: <PROJECT_ROOT>/article_text_analysis/src/pipeline.py
-THIS_FILE = Path(__file__).resolve()
-PROJECT_ROOT = THIS_FILE.parents[2]
 
-INPUT_PATH = os.path.join(PROJECT_ROOT, "data", "raw_data", "input.xlsx")
-STOPWORDS_DIR = os.path.join(PROJECT_ROOT, "data", "raw_articles", "StopWords")
-POSITIVE_DICT_PATH = os.path.join(PROJECT_ROOT, "data", "raw_articles", "dictionaries", "positive-words.txt")
-NEGATIVE_DICT_PATH = os.path.join(PROJECT_ROOT, "data", "raw_articles", "dictionaries", "negative-words.txt")
-RAW_ARTICLES_DIR = os.path.join(PROJECT_ROOT, "data", "raw_articles", "raw_texts")
-OUTPUT_PATH = os.path.join(PROJECT_ROOT, "output", "Output_Data_Structure.xlsx")
 
-# The exact column order required by the assignment's output structure.
-OUTPUT_COLUMNS = [
-    "URL_ID", "URL",
-    "POSITIVE SCORE", "NEGATIVE SCORE", "POLARITY SCORE", "SUBJECTIVITY SCORE",
-    "AVG SENTENCE LENGTH", "PERCENTAGE OF COMPLEX WORDS", "FOG INDEX",
-    "AVG NUMBER OF WORDS PER SENTENCE", "COMPLEX WORD COUNT", "WORD COUNT",
-    "SYLLABLE PER WORD", "PERSONAL PRONOUNS", "AVG WORD LENGTH",
-]
 
 # Empty placeholder row used when a URL fails extraction, so the output
 # still has one row per input URL_ID — just with blank metric values

@@ -7,25 +7,8 @@ from pathlib import Path
 
 from article_text_analysis.exceptions.exception import CustomException
 from article_text_analysis.logger.logging import logging
+from article_text_analysis.constant import DEFAULT_OUTPUT_DIR,HEADERS,BOILER_PLATES
 
-# __file__ = the absolute path to THIS script, wherever it sits on disk.
-# walk UP from this file's own location to the project root, so this
-# script behaves identically no matter what folder happened to be
-
-# extractor.py lives at: <PROJECT_ROOT>/article_text_analysis/src/extractor.py
-# so we go up 3 levels: src -> article_text_analysis -> PROJECT_ROOT
-THIS_FILE = Path(__file__).resolve()
-PROJECT_ROOT = THIS_FILE.parents[2]
-DEFAULT_OUTPUT_DIR = PROJECT_ROOT / "data" / "raw_articles"
-
-# Request headers
-HEADERS = {
-    "User-Agent": (
-        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
-        "AppleWebKit/537.36 (KHTML, like Gecko) "
-        "Chrome/115.0.0.0 Safari/537.36"
-    )
-}
 
 
 def fetch_html(url, timeout=10):
@@ -76,8 +59,8 @@ def extract_article(html, url_id):
         collected_tags = []
         for tag in content_tags:
             tag_text = tag.get_text(strip=True)
-            if tag.name in ("h1", "h2", "h3", "h4") and tag_text.lower() in ("project snapshots", "summarize", "contact details"):
-                logging.info(f"[{url_id}] Reached 'Project Snapshot' heading — stopping extraction here.")
+            if tag.name in ("h1", "h2", "h3", "h4") and tag_text.lower() in BOILER_PLATES:
+                logging.info(f"[{url_id}] Reached 'Boiler Plate' headings — stopping extraction here.")
                 break
             collected_tags.append(tag_text)
  

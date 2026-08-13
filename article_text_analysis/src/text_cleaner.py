@@ -6,8 +6,8 @@ import spacy # type: ignore
 
 from article_text_analysis.exceptions.exception import CustomException
 from article_text_analysis.logger.logging import logging
+from article_text_analysis.constant import nlp
 
-nlp = spacy.load("en_core_web_sm")
 
 
 def load_stopwords(stopwords_dir):
