@@ -77,13 +77,13 @@ A few non-obvious choices, documented here rather than left implicit:
 
 ```bash
 # Clone and enter the project
-git clone https://github.com/yourusername/article-text-analytics-pipeline.git
+git clone https://github.com/faizan23804/article-text-analytics-pipeline.git
 cd article-text-analytics-pipeline
 
 # Create and activate a virtual environment
-python -m venv venv
-venv\Scripts\activate      # Windows
-# source venv/bin/activate  # macOS/Linux
+conda create -p venv python=3.11
+conda activate venv/    
+
 
 # Install dependencies (includes an editable install of this package)
 pip install -r requirements.txt
